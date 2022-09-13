@@ -1,4 +1,4 @@
-﻿//UNITY_SHADER_NO_UPGRADE
+//UNITY_SHADER_NO_UPGRADE
 
 Shader "Unlit/SolidColorShader"
 {
@@ -9,18 +9,19 @@ Shader "Unlit/SolidColorShader"
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
-			uniform float4 _Color;
 
 			#include "UnityCG.cginc"
 
 			struct vertIn
 			{
 				float4 vertex : POSITION;
+                float color : COLOR;
 			};
 
 			struct vertOut
 			{
 				float4 vertex : SV_POSITION;
+                float color : COLOR;
 			};
 
 			// Implementation of the vertex shader
@@ -28,13 +29,14 @@ Shader "Unlit/SolidColorShader"
 			{
 				vertOut o;
 				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+                o.color = v.color;
 				return o;
 			}
 			
 			// Implementation of the fragment (pixel) shader
 			fixed4 frag(vertOut v) : SV_Target
 			{
-				return _Color;
+				return v.color;
 			}
 			ENDCG
 		}

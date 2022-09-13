@@ -8,18 +8,20 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class GenerateCube : MonoBehaviour
 {
+    [SerializeField] Shader shader;
+    private Material material;
     private void Start()
     {
         // Generate the mesh and assign to the mesh filter.
         GetComponent<MeshFilter>().mesh = CreateMesh();
         
         // Get the material used by this game object's 'Renderer'.
-        var material = GetComponent<Renderer>().material;
+        this.material = GetComponent<Renderer>().material;
 
         // Recall how we set the material's "color" in the first workshop:
         // e.g. material.color = ...;
         // Turns out we can also set the material's shader in a similar way:
-        material.shader = null;
+        material.shader = shader;
     }
 
     private Mesh CreateMesh()
@@ -112,8 +114,8 @@ public class GenerateCube : MonoBehaviour
             Color.red,
 
             // Left face
-            Color.yellow,
-            Color.yellow,
+            Color.black,
+            Color.black,
             Color.yellow,
 
             Color.yellow,
@@ -210,5 +212,10 @@ public class GenerateCube : MonoBehaviour
         mesh.SetIndices(indices, MeshTopology.Triangles, 0);
 
         return mesh;
+    }
+
+    private void Update() {
+        float t = Time.time % 1;
+        this.material.color = Color.HSVToRGB(t,1,1);
     }
 }
