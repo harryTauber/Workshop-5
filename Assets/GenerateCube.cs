@@ -9,11 +9,13 @@ using UnityEngine;
 public class GenerateCube : MonoBehaviour
 {
     [SerializeField] Shader shader;
+    [SerializeField] Texture texture;
     private Material material;
     private void Start()
     {
         // Generate the mesh and assign to the mesh filter.
         GetComponent<MeshFilter>().mesh = CreateMesh();
+        GetComponent<MeshRenderer>().material.mainTexture = this.texture;
         
         // Get the material used by this game object's 'Renderer'.
         this.material = GetComponent<Renderer>().material;
@@ -171,27 +173,30 @@ public class GenerateCube : MonoBehaviour
             new Vector2(0.666f, 0.0f),
 
             // Left face
-            new Vector2(0.0f, 0.0f),
-            new Vector2(0.0f, 0.0f),
-            new Vector2(0.0f, 0.0f),
+             new Vector2(0.666f, 0.666f),
+            new Vector2(0.333f, 0.666f),
+            new Vector2(0.333f, 1.0f),
 
-            new Vector2(0.0f, 0.0f),
-            new Vector2(0.0f, 0.0f),
-            new Vector2(0.0f, 0.0f),
+            new Vector2(0.666f, 0.666f),
+            new Vector2(0.333f, 1.0f),
+            new Vector2(0.666f, 1.0f),
+
 
             // Right face
             new Vector2(0.0f, 0.333f),
             new Vector2(0.333f, 0.666f),
             new Vector2(0.333f, 0.333f),
 
-            new Vector2(0.0f, 0.666f),
             new Vector2(0.0f, 0.333f),
+            new Vector2(0.0f, 0.666f),
             new Vector2(0.333f, 0.666f),
+            
 
             // Front face
-            new Vector2(0.0f, 0.0f),
-            new Vector2(0.0f, 0.0f),
-            new Vector2(0.0f, 0.0f),
+            new Vector2(0.666f, 0.666f),
+            new Vector2(0.333f, 0.333f),
+            new Vector2(0.333f, 0.666f),
+            
 
             new Vector2(0.666f, 0.666f),
             new Vector2(0.666f, 0.333f),

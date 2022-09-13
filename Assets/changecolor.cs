@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class changecolor : MonoBehaviour
 {
+    [SerializeField] Shader shader;
     private Material material;
     // Start is called before the first frame update
     void Start()
     {
         this.material = GetComponent<MeshRenderer>().material;
+        material.shader = shader;
     }
 
     // Update is called once per frame
